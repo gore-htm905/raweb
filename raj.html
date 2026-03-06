@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guidance Portal</title>
+    <!-- EXTERNAL CSS: Tailwind CSS Framework -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+    <!-- EXTERNAL CSS: Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- EXTERNAL CSS: Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- EXTERNAL CSS: Chart.js Library for Pie Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- EXTERNAL CSS: App Stylesheet -->
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <!-- ==================== HEADER ==================== -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between flex-wrap">
+                <a href="#" class="text-2xl font-bold flex items-center gradient-text" onclick="showPage('home-page'); return false;">
+                    <i class="fas fa-graduation-cap text-3xl mr-3"></i>
+                    <span>Career Portal</span>
+                </a>
+
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#quiz" class="text-gray-700 hover:text-purple-600 transition font-medium">Career Quiz</a>
+                    <a href="#comparison" class="text-gray-700 hover:text-purple-600 transition font-medium">Compare Careers</a>
+                    <a href="#roadmap" class="text-gray-700 hover:text-purple-600 transition font-medium">Roadmap</a>
+                    <a href="#resources" class="text-gray-700 hover:text-purple-600 transition font-medium">Resources</a>
+                    <a href="#contact" class="text-gray-700 hover:text-purple-600 transition font-medium">Contact</a>
+
+                    <button id="darkModeToggle" class="dark-mode-toggle" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <span class="flex items-center border-l pl-6">
+                      <label class="switch">
+                        <input type="checkbox" id="voiceToggle" checked>
+                        <span class="slider"></span>
+                      </label>
+                      <span class="voice-label" id="voiceLabel">Voice On</span>
+                      <i class="fas fa-volume-up ml-2 text-purple-600"></i>
+                    </span>
+                </div>
+
+                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="#quiz" class="block py-2 text-gray-700 hover:text-purple-600" onclick="hideMobileMenu()">Career Quiz</a>
+                <a href="#comparison" class="block py-2 text-gray-700 hover:text-purple-600" onclick="hideMobileMenu()">Compare Careers</a>
+                <a href="#roadmap" class="block py-2 text-gray-700 hover:text-purple-600" onclick="hideMobileMenu()">Roadmap</a>
+                <a href="#resources" class="block py-2 text-gray-700 hover:text-purple-600" onclick="hideMobileMenu()">Resources</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="container mx-auto px-4 py-8">
+        <div id="home-page" class="page-content active">
+
+            <!-- ==================== HERO SECTION ==================== -->
+            <section class="glass-card rounded-2xl shadow-2xl p-8 md:p-12 mb-12">
+                <div class="hero-banner">
+                    <h1 class="text-gray-800">📚 Discover Your Perfect Career Path</h1>
+                    <p>Transform your future with expert guidance and personalized career insights</p>
+                </div>
+            </section>
+
+            <!-- ==================== CAREER FIELDS SECTION ==================== -->
+            <section id="fields" class="mb-16">
+                <h2 class="section-title gradient-text">🎯 Explore Career Fields</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="field-card p-6 rounded-2xl shadow-lg" onclick="showFieldDetails('Engineering')" role="button" tabindex="0" onkeypress="if(event.key==='Enter') showFieldDetails('Engineering')">
+                        <div class="text-5xl mb-4 text-blue-600"><i class="fas fa-cogs"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Engineering</h3>
+                        <p class="text-gray-600">Build the future with technology</p>
+                    </div>
+                    
+                    <div class="field-card p-6 rounded-2xl shadow-lg" onclick="showFieldDetails('Medicine')" role="button" tabindex="0" onkeypress="if(event.key==='Enter') showFieldDetails('Medicine')">
+                        <div class="text-5xl mb-4 text-red-600"><i class="fas fa-heartbeat"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Medicine</h3>
+                        <p class="text-gray-600">Heal and help humanity</p>
+                    </div>
+                    
+                    <div class="field-card p-6 rounded-2xl shadow-lg" onclick="showFieldDetails('Law')">
+                        <div class="text-5xl mb-4 text-yellow-600"><i class="fas fa-balance-scale"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Law</h3>
+                        <p class="text-gray-600">Fight for justice and rights</p>
+                    </div>
+                    
+                    <div class="field-card p-6 rounded-2xl shadow-lg" onclick="showFieldDetails('Management')">
+                        <div class="text-5xl mb-4 text-green-600"><i class="fas fa-chart-line"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Management</h3>
+                        <p class="text-gray-600">Lead teams to success</p>
+                    </div>
+                    
+                    <div class="field-card p-6 rounded-2xl shadow-lg" onclick="showFieldDetails('Arts')">
+                        <div class="text-5xl mb-4 text-pink-600"><i class="fas fa-palette"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Arts & Humanities</h3>
+                        <p class="text-gray-600">Express and inspire creativity</p>
+                    </div>
+                    
+                    <div class="field-card p-6 rounded-2xl shadow-lg" onclick="showFieldDetails('Science')">
+                        <div class="text-5xl mb-4 text-purple-600"><i class="fas fa-flask"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Science</h3>
+                        <p class="text-gray-600">Discover and innovate</p>
+                    </div>
+                    
+                    <div class="field-card p-6 rounded-2xl shadow-lg" onclick="showFieldDetails('Commerce')">
+                        <div class="text-5xl mb-4 text-indigo-600"><i class="fas fa-calculator"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Commerce</h3>
+                        <p class="text-gray-600">Master finance and business</p>
+                    </div>
+                    
+                    <div class="field-card p-6 rounded-2xl shadow-lg" onclick="showFieldDetails('Design')">
+                        <div class="text-5xl mb-4 text-orange-600"><i class="fas fa-pen-nib"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Design</h3>
+                        <p class="text-gray-600">Create beautiful experiences</p>
+                    </div>
+                    
+                    <div class="field-card p-6 rounded-2xl shadow-lg" onclick="showFieldDetails('AI')">
+                        <div class="text-5xl mb-4 text-cyan-600"><i class="fas fa-robot"></i></div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">AI & Data Science</h3>
+                        <p class="text-gray-600">Shape the AI revolution</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== IMPROVED CAREER QUIZ ==================== -->
+            <section id="quiz" class="glass-card rounded-2xl shadow-2xl p-8 md:p-12 mb-16">
+                <h2 class="section-title gradient-text text-center">🧠 Career Quiz - Find Your Ideal Path</h2>
+                <p class="text-center text-gray-600 mb-8 text-lg">Answer 5 questions to get a personalized career suitability analysis with pie chart visualization.</p>
+                
+                <div class="max-w-4xl mx-auto">
+                    <form id="careerQuiz" class="space-y-6">
+                        <!-- Q1 -->
+                        <div class="quiz-question">
+                            <label class="form-label">1️⃣ What subjects do you enjoy most?</label>
+                            <select id="subjects" class="form-select" required>
+                                <option value="">-- Select --</option>
+                                <option value="math">Math, Physics, Chemistry</option>
+                                <option value="bio">Biology, Chemistry, Life Sciences</option>
+                                <option value="arts">Literature, History, Languages</option>
+                                <option value="commerce">Economics, Accounts, Business</option>
+                                <option value="tech">Computers, Coding, Tech</option>
+                                <option value="creative">Art, Design, Music</option>
+                            </select>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="quiz-question">
+                            <label class="form-label">2️⃣ Do you prefer working:</label>
+                            <select id="worktype" class="form-select" required>
+                                <option value="">-- Select --</option>
+                                <option value="team">In a team</option>
+                                <option value="alone">Independently</option>
+                                <option value="both">Both equally</option>
+                                <option value="leadership">Leading a team</option>
+                            </select>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="quiz-question">
+                            <label class="form-label">3️⃣ What is your strongest skill?</label>
+                            <select id="skill" class="form-select" required>
+                                <option value="">-- Select --</option>
+                                <option value="creativity">Creativity & Innovation</option>
+                                <option value="analysis">Analysis & Logic</option>
+                                <option value="communication">Communication & Speaking</option>
+                                <option value="problem">Problem Solving</option>
+                                <option value="technology">Technical & Tech Skills</option>
+                                <option value="leadership">Leadership & Management</option>
+                            </select>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="quiz-question">
+                            <label class="form-label">4️⃣ What appeals to you most in a career?</label>
+                            <select id="appeal" class="form-select" required>
+                                <option value="">-- Select --</option>
+                                <option value="salary">High salary potential</option>
+                                <option value="impact">Making social impact</option>
+                                <option value="creativity">Creative expression</option>
+                                <option value="stability">Job security & stability</option>
+                                <option value="growth">Continuous learning & growth</option>
+                            </select>
+                        </div>
+
+                        <!-- Q5 -->
+                        <div class="quiz-question">
+                            <label class="form-label">5️⃣ Your preferred work environment:</label>
+                            <select id="environment" class="form-select" required>
+                                <option value="">-- Select --</option>
+                                <option value="office">Office/Corporate</option>
+                                <option value="field">Field/Outdoor</option>
+                                <option value="research">Research/Lab</option>
+                                <option value="freelance">Freelance/Remote</option>
+                                <option value="client">Client-facing/Interactive</option>
+                            </select>
+                        </div>
+
+                        <!-- Personal Info -->
+                        <div class="quiz-question">
+                            <label class="form-label">👤 Your Name:</label>
+                            <input type="text" id="userName" class="form-input" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="quiz-question">
+                            <label class="form-label">📧 Your Email:</label>
+                            <input type="email" id="userEmail" class="form-input" placeholder="Enter your email" required>
+                        </div>
+
+                        <button type="submit" class="btn-gradient w-full text-xl py-4" style="color: white;">
+                            <i class="fas fa-arrow-right mr-2"></i> Analyze My Career Suitability
+                        </button>
+                    </form>
+
+                    <!-- Quiz Results with Pie Chart -->
+                    <div id="quizResult" class="hidden mt-12">
+                        <div class="glass-card rounded-2xl p-8 md:p-12">
+                            <h3 class="text-3xl font-bold gradient-text mb-4 text-center">📊 Your Career Suitability Profile</h3>
+                            <p id="userName-display" class="text-center text-gray-600 text-lg mb-8"></p>
+
+                            <!-- PIE CHART -->
+                            <div class="quiz-result-chart">
+                                <canvas id="careerChart"></canvas>
+                            </div>
+
+                            <!-- Score Breakdown -->
+                            <div class="result-breakdown">
+                                <div class="result-item">
+                                    <div class="result-item-score" id="eng-score">0%</div>
+                                    <div class="result-item-label">Engineering & Tech</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-item-score" id="ai-score">0%</div>
+                                    <div class="result-item-label">AI & Data Science</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-item-score" id="management-score">0%</div>
+                                    <div class="result-item-label">Management</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-item-score" id="design-score">0%</div>
+                                    <div class="result-item-label">Design & Creative</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-item-score" id="arts-score">0%</div>
+                                    <div class="result-item-label">Arts & Humanities</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-item-score" id="healthcare-score">0%</div>
+                                    <div class="result-item-label">Healthcare</div>
+                                </div>
+                            </div>
+
+                            <!-- Recommendation -->
+                            <div class="mt-10 p-6 bg-gradient-to-r from-purple-100 to-pink-100 border-l-4 border-purple-600 rounded-xl">
+                                <h4 class="text-xl font-bold text-gray-800 mb-2">🌟 Top Recommended Domain:</h4>
+                                <p id="recommendation" class="text-lg text-gray-700 font-semibold"></p>
+                                <p id="recommendation-desc" class="text-gray-600 mt-2 text-sm"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== CAREER COMPARISON TOOL ==================== -->
+            <section id="comparison" class="mb-16">
+                <h2 class="section-title gradient-text">⚖️ Compare Two Careers</h2>
+                <p class="text-center text-gray-600 mb-10 text-lg">Compare eligibility, skills, salary & job prospects side-by-side</p>
+
+                <div class="max-w-5xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-6 mb-10">
+                        <div>
+                            <label class="form-label mb-3">Select First Career:</label>
+                            <select id="career1" class="form-select" onchange="updateComparison()">
+                                <option value="">-- Select --</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Medicine">Medicine</option>
+                                <option value="Law">Law</option>
+                                <option value="Management">Management</option>
+                                <option value="Arts">Arts</option>
+                                <option value="Science">Science</option>
+                                <option value="Commerce">Commerce</option>
+                                <option value="Design">Design</option>
+                                <option value="AI">AI & Data Science</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="form-label mb-3">Select Second Career:</label>
+                            <select id="career2" class="form-select" onchange="updateComparison()">
+                                <option value="">-- Select --</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Medicine">Medicine</option>
+                                <option value="Law">Law</option>
+                                <option value="Management">Management</option>
+                                <option value="Arts">Arts</option>
+                                <option value="Science">Science</option>
+                                <option value="Commerce">Commerce</option>
+                                <option value="Design">Design</option>
+                                <option value="AI">AI & Data Science</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="comparisonResults" class="hidden">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div id="comparison-career1-details"></div>
+                            <div id="comparison-career2-details"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== CAREER ROADMAP ==================== -->
+            <section id="roadmap" class="mb-16">
+                <h2 class="section-title gradient-text">🗺️ Your Career Roadmap</h2>
+                <p class="text-center text-gray-600 mb-10 text-lg">Step-by-step journey from 10th to your dream career</p>
+
+                <div class="max-w-3xl mx-auto">
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon"><i class="fas fa-book"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">📚 Class 10th</h3>
+                            <p class="text-gray-700">Focus on fundamentals • Explore interests •  Maintain good grades • Take aptitude tests</p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon"><i class="fas fa-tasks"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">🎓 Class 11-12 (Choose Stream)</h3>
+                            <p class="text-gray-700">Science • Commerce • Arts - Choose based on your interests</p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">🏫 Entrance Exams</h3>
+                            <p class="text-gray-700">JEE, NEET, CLAT, NIFT, CAT - Clear exams for your career path</p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon"><i class="fas fa-university"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">🎯 Undergrad (3-5 years)</h3>
+                            <p class="text-gray-700">Join top college • Build projects • Internships • Networking</p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon"><i class="fas fa-wrench"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">💼 Skill Development</h3>
+                            <p class="text-gray-700">Certifications • Portfolio projects • Open source • Emerging tech</p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon"><i class="fas fa-briefcase"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">🚀 First Job</h3>
+                            <p class="text-gray-700">Campus placements • On-the-job learning • Build experience</p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon"><i class="fas fa-trending-up"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">📈 Career Growth</h3>
+                            <p class="text-gray-700">Post-graduation • Senior roles • Promotions • Leadership</p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon"><i class="fas fa-crown"></i></div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">🌟 Excellence</h3>
+                            <p class="text-gray-700">Leadership • Subject matter expertise • Innovation • Mentoring</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== RESOURCES SECTION ==================== -->
+            <section id="resources" class="glass-card rounded-2xl shadow-2xl p-8 md:p-12 mb-16">
+                <h2 class="section-title gradient-text text-center">📚 Useful Resources & Links</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="comparison-card">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-clipboard-list text-purple-600 mr-2"></i> Entrance Exams</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>🔗 <a href="https://jeemain.nta.ac.in" target="_blank" class="text-purple-600 hover:underline">JEE Main</a> - Engineering</li>
+                            <li>🔗 <a href="https://neet.nta.ac.in" target="_blank" class="text-purple-600 hover:underline">NEET</a> - Medical</li>
+                            <li>🔗 <a href="https://consortiumofnationallawuniversities.ac.in" target="_blank" class="text-purple-600 hover:underline">CLAT</a> - Law</li>
+                            <li>🔗 <a href="https://www.caicwa.org" target="_blank" class="text-purple-600 hover:underline">CA Foundation</a> - Commerce</li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-card">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-globe text-blue-600 mr-2"></i>Learning Platforms</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>🔗 <a href="https://www.coursera.org" target="_blank" class="text-purple-600 hover:underline">Coursera</a></li>
+                            <li>🔗 <a href="https://www.udemy.com" target="_blank" class="text-purple-600 hover:underline">Udemy</a></li>
+                            <li>🔗 <a href="https://www.linkedin.com/learning" target="_blank" class="text-purple-600 hover:underline">LinkedIn Learning</a></li>
+                            <li>🔗 <a href="https://www.freecodecamp.org" target="_blank" class="text-purple-600 hover:underline">FreeCodeCamp</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-card">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-briefcase text-green-600 mr-2"></i> Job Portals</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>🔗 <a href="https://www.naukri.com" target="_blank" class="text-purple-600 hover:underline">Naukri.com</a></li>
+                            <li>🔗 <a href="https://www.internshala.com" target="_blank" class="text-purple-600 hover:underline">Internshala</a></li>
+                            <li>🔗 <a href="https://www.linkedin.com" target="_blank" class="text-purple-600 hover:underline">LinkedIn</a></li>
+                            <li>🔗 <a href="https://www.indeed.com" target="_blank" class="text-purple-600 hover:underline">Indeed</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-card">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-code text-orange-600 mr-2"></i> Tech Skills</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>🔗 <a href="https://www.hackerrank.com" target="_blank" class="text-purple-600 hover:underline">HackerRank</a></li>
+                            <li>🔗 <a href="https://www.kaggle.com" target="_blank" class="text-purple-600 hover:underline">Kaggle</a></li>
+                            <li>🔗 <a href="https://www.github.com" target="_blank" class="text-purple-600 hover:underline">GitHub</a></li>
+                            <li>🔗 <a href="https://www.codecademy.com" target="_blank" class="text-purple-600 hover:underline">Codecademy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== CONTACT US SECTION ==================== -->
+            <section id="contact" class="contact-section mb-16">
+                <h2 class="section-title gradient-text text-center">📧 Get In Touch With Us</h2>
+                <p class="text-center text-gray-600 mb-10 text-lg">Have questions? We'd love to hear from you!</p>
+
+                <div class="max-w-5xl mx-auto">
+                    <!-- Contact Info -->
+                    <div class="contact-info mb-12">
+                        <div class="contact-info-item">
+                            <i class="fas fa-envelope"></i>
+                            <h4>Email</h4>
+                            <p>support@careerportal.com</p>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="fas fa-phone"></i>
+                            <h4>Phone</h4>
+                            <p>+91 8800 123456</p>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h4>Location</h4>
+                            <p>Delhi, India</p>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <form id="contactForm" class="contact-form space-y-5">
+                        <div class="form-group">
+                            <label class="form-label">📝 Full Name</label>
+                            <input type="text" id="contactName" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">📧 Email Address</label>
+                            <input type="email" id="contactEmail" class="form-input" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">📱 Phone Number (Optional)</label>
+                            <input type="tel" id="contactPhone" class="form-input" placeholder="Enter your phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">💬 Subject</label>
+                            <select id="contactSubject" class="form-select" required>
+                                <option value="">-- Select a subject --</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="bug">Report a Bug</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="partnership">Partnership</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">💭 Message</label>
+                            <textarea id="contactMessage" class="form-textarea" rows="5" placeholder="Enter your message..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-gradient w-full text-lg py-3" style="color: white;">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Message
+                        </button>
+
+                        <div id="contactStatus" class="hidden p-4 rounded-lg text-center font-semibold"></div>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- FIELD DETAILS MODAL -->
+        <div id="field-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+            <div class="glass-card rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
+                <button onclick="hideModal()" class="absolute top-6 right-6 bg-gray-100 hover:bg-gray-200 rounded-full w-10 h-10 flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <div id="modal-content" class="mt-4"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="glass-card mt-12 py-8 px-4 text-center bg-white">
+        <p class="text-gray-700 text-lg font-medium">© 2025 Career Guidance Portal - Made with ❤️ to help students</p>
+        <p class="text-gray-600 text-sm mt-2">Your success is our mission!</p>
+    </footer>
+
+    <!-- CHATBOT WIDGET -->
+    <button class="chatbot-launcher" id="openChatbot"><i class="fas fa-comments"></i></button>
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <i class="fas fa-robot mr-2"></i>CareerBot
+            <button class="chatbot-close" id="closeChatbot">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chatbot-message bot">
+                <div class="chatbot-bubble">
+                    👋 <strong>Hi!</strong> I'm CareerBot. Ask me about:<br>
+                    • Courses after 12th<br>
+                    • Salary expectations<br>
+                    • Entrance exams<br>
+                    • Career scope
+                </div>
+            </div>
+        </div>
+        <form class="chatbot-input-row" id="chatbotForm">
+            <input type="text" id="chatbotInput" placeholder="Ask me anything..." required />
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // ---- DARK MODE TOGGLE ----
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+
+        // Check if user has dark mode preference saved
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            htmlElement.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        darkModeToggle.addEventListener('click', function() {
+            htmlElement.classList.toggle('dark-mode');
+            
+            if (htmlElement.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+        // ---- VOICE ASSISTANT ----
+        let voiceEnabled = true;
+        const voiceToggle = document.getElementById('voiceToggle');
+        const voiceLabel = document.getElementById('voiceLabel');
+
+        function speakText(text) {
+            if (!voiceEnabled) return;
+            window.speechSynthesis.cancel();
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.rate = 1.05;
+            const voices = window.speechSynthesis.getVoices();
+            const preferred = voices.find(v => v.lang.startsWith('en-IN'));
+            if (preferred) utter.voice = preferred;
+            else if (voices.length > 0) utter.voice = voices[0];
+            window.speechSynthesis.speak(utter);
+        }
+
+        voiceToggle.addEventListener('change', function() {
+            voiceEnabled = this.checked;
+            voiceLabel.textContent = voiceEnabled ? 'Voice On' : 'Voice Off';
+            if (!voiceEnabled) window.speechSynthesis.cancel();
+        });
+
+        // ---- CAREER FIELDS DATA ----
+        const careerFields = {
+            "Engineering": {
+                branches: "CS, Mechanical, Civil, Electrical, Chemical, Electronics, Aeronautical",
+                eligibility: "10+2 PCM + JEE/State CET",
+                skills: "Problem-solving, Coding, Analytical thinking, Teamwork",
+                recruiters: "TCS, Infosys, Wipro, Google, Amazon, Microsoft, ISRO",
+                jobs: "Software Developer, Data Analyst, Mechanical Engineer, Systems Architect",
+                future: "AI, IoT, Automation, Quantum Computing, Green Tech",
+                salary: "Starting: ₹3-8 LPA | Experienced: ₹15-40+ LPA"
+            },
+            "Medicine": {
+                branches: "MBBS, BDS, Nursing, Pharmacy, Physiotherapy",
+                eligibility: "10+2 PCB + NEET",
+                skills: "Empathy, Attention to detail, Communication, Ethics",
+                recruiters: "Apollo Hospitals, AIIMS, Fortis, Max Healthcare",
+                jobs: "Doctor, Dentist, Nurse, Pharmacist, Physiotherapist",
+                future: "Telemedicine, AI Diagnostics, Regenerative Medicine",
+                salary: "Starting: ₹5-12 LPA | Experienced: ₹20-50+ LPA"
+            },
+            "Law": {
+                branches: "BA LLB, LLB, LLM, Corporate Law, IPR",
+                eligibility: "10+2 or Graduation + CLAT",
+                skills: "Critical thinking, Research, Speaking, Ethics",
+                recruiters: "Law Firms, Courts, Corporate Legal Depts",
+                jobs: "Lawyer, Judge, Legal Analyst, Counsel",
+                future: "Cyber Law, Environmental Law, IP Rights",
+                salary: "Starting: ₹4-8 LPA | Experienced: ₹15-35+ LPA"
+            },
+            "Management": {
+                branches: "BBA, MBA,  PGDM, Executive MBA",
+                eligibility: "12th for BBA + CAT/XAT for MBA",
+                skills: "Leadership, Communication, Decision-making",
+                recruiters: "Deloitte, KPMG, TCS, Amazon, Microsoft",
+                jobs: "Manager, Consultant, HR, Marketing Executive",
+                future: "Business Analytics, Digital Marketing, Startups",
+                salary: "Starting: ₹4-8 LPA | Post-MBA: ₹15-40+ LPA"
+            },
+            "Arts": {
+                branches: "BA, Journalism, Psychology, History, English",
+                eligibility: "10+2 any stream",
+                skills: "Communication, Creativity, Research, Critical thinking",
+                recruiters: "Media Houses, NGOs, Schools, Publishing",
+                jobs: "Journalist, Teacher, Psychologist, Content Writer",
+                future: "Digital Media, Content Strategy, UX Design",
+                salary: "Starting: ₹2-5 LPA | Experienced: ₹10-25+ LPA"
+            },
+            "Science": {
+                branches: "BSc Physics, Chemistry, Maths, Biology, Computer",
+                eligibility: "10+2 Science",
+                skills: "Research, Analysis, Observation, Technical skills",
+                recruiters: "ISRO, Research Institutes, Colleges, Pharma",
+                jobs: "Scientist, Professor, Lab Technician, Researcher",
+                future: "Space Research, Data Science, Biotech, Nanotech",
+                salary: "Starting: ₹3-7 LPA | Experienced: ₹12-28+ LPA"
+            },
+            "Commerce": {
+                branches: "B.Com, CA, CS, CFA, Banking, Finance",
+                eligibility: "10+2 Commerce + CA/CFA entrance",
+                skills: "Numerical, Financial management, Analysis",
+                recruiters: "Big 4, Banks, Financial Firms, Stock Exchanges",
+                jobs: "Accountant, Financial Analyst, Auditor, Investment Banker",
+                future: "FinTech, Crypto, Digital Banking, Data Analytics",
+                salary: "Starting: ₹3-8 LPA | CA: ₹15-40+ LPA"
+            },
+            "Design": {
+                branches: "B.Des, Animation, Fashion, UI/UX, Game Design",
+                eligibility: "10+2 any + NIFT, NID, UCEED entrance",
+                skills: "Creativity, Technical skills, Communication",
+                recruiters: "Design Studios, Tech Companies, Ad Agencies",
+                jobs: "UI/UX Designer, Graphic Designer, Animator",
+                future: "AR/VR, Interaction Design, Metaverse Design",
+                salary: "Starting: ₹3-7 LPA | Experienced: ₹12-30+ LPA"
+            },
+            "AI": {
+                branches: "B.Tech AI, Data Science, ML, BSc Data Science",
+                eligibility: "10+2 PCM + JEE/entrance exams",
+                skills: "Programming, Math, Statistics, Data analysis",
+                recruiters: "Google, Microsoft, Amazon, Tesla, IBM",
+                jobs: "Data Scientist, ML Engineer, AI Researcher, AI Ethicist",
+                future: "Generative AI, Robotics, Autonomous Vehicles, NLP",
+                salary: "Starting: ₹8-15 LPA | Experienced: ₹30-70+ LPA"
+            }
+        };
+
+        function showFieldDetails(field) {
+            const data = careerFields[field];
+            if (!data) return;
+            
+            const modalHtml = `
+                <h2 class="text-4xl font-bold gradient-text mb-6">${field}</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-lg"><strong>Branches:</strong> ${data.branches}</div>
+                    <div class="bg-green-50 p-6 rounded-lg"><strong>Eligibility:</strong> ${data.eligibility}</div>
+                    <div class="bg-purple-50 p-6 rounded-lg"><strong>Skills:</strong> ${data.skills}</div>
+                    <div class="bg-yellow-50 p-6 rounded-lg"><strong>Recruiters:</strong> ${data.recruiters}</div>
+                    <div class="bg-pink-50 p-6 rounded-lg"><strong>Jobs:</strong> ${data.jobs}</div>
+                    <div class="bg-indigo-50 p-6 rounded-lg"><strong>Future:</strong> ${data.future}</div>
+                </div>
+                <div class="mt-6 p-6 bg-gradient-to-r from-purple-100 to-pink-100 border-l-4 border-purple-600 rounded-xl">
+                    <strong>Salary Range:</strong> ${data.salary}
+                </div>
+            `;
+            
+            document.getElementById('modal-content').innerHTML = modalHtml;
+            document.getElementById('field-modal').classList.remove('hidden');
+            speakText(`${field}. ${data.branches}. Eligibility: ${data.eligibility}.`);
+        }
+
+        function hideModal() {
+            document.getElementById('field-modal').classList.add('hidden');
+            window.speechSynthesis.cancel();
+        }
+
+        // MOBILE MENU
+        function hideMobileMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        document.getElementById('mobile-menu-button').onclick = () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        };
+
+        // PAGE NAVIGATION
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // ---- QUIZ WITH PIE CHART ----
+        let careerChart;
+
+        document.getElementById('careerQuiz').onsubmit = function(e) {
+            e.preventDefault();
+            const userName = document.getElementById('userName').value;
+
+            let scores = {
+                'Engineering & Tech': 0,
+                'AI & Data Science': 0,
+                'Management': 0,
+                'Design & Creative': 0,
+                'Arts & Humanities': 0,
+                'Healthcare': 0
+            };
+
+            const subjects = document.getElementById('subjects').value;
+            const worktype = document.getElementById('worktype').value;
+            const skill = document.getElementById('skill').value;
+            const appeal = document.getElementById('appeal').value;
+            const environment = document.getElementById('environment').value;
+
+            // Score calculations
+            if (subjects === 'math') { scores['Engineering & Tech'] += 25; scores['AI & Data Science'] += 20; }
+            else if (subjects === 'bio') { scores['Healthcare'] += 30; }
+            else if (subjects === 'arts') { scores['Arts & Humanities'] += 25; scores['Design & Creative'] += 20; }
+            else if (subjects === 'commerce') { scores['Management'] += 25; }
+            else if (subjects === 'tech') { scores['AI & Data Science'] += 30; scores['Engineering & Tech'] += 25; }
+            else if (subjects === 'creative') { scores['Design & Creative'] += 30; }
+
+            if (worktype === 'team') { scores['Management'] += 20; }
+            else if (worktype === 'alone') { scores['AI & Data Science'] += 20; scores['Design & Creative'] += 15; }
+            else if (worktype === 'leadership') { scores['Management'] += 25; }
+            else if (worktype === 'both') Object.keys(scores).forEach(k => scores[k] += 10);
+
+            if (skill === 'creativity') { scores['Design & Creative'] += 25; }
+            else if (skill === 'analysis') { scores['AI & Data Science'] += 25; }
+            else if (skill === 'communication') { scores['Management'] += 25; }
+            else if (skill === 'problem') { scores['Engineering & Tech'] += 25; }
+            else if (skill === 'technology') { scores['AI & Data Science'] += 30; }
+            else if (skill === 'leadership') { scores['Management'] += 30; }
+
+            if (appeal === 'salary') { scores['AI & Data Science'] += 20; }
+            else if (appeal === 'impact') { scores['Healthcare'] += 25; }
+            else if (appeal === 'creativity') { scores['Design & Creative'] += 25; }
+            else if (appeal === 'stability') { scores['Management'] += 15; }
+            else if (appeal === 'growth') { scores['AI & Data Science'] += 20; }
+
+            if (environment === 'office') { scores['Management'] += 20; }
+            else if (environment === 'field') { scores['Healthcare'] += 20; }
+            else if (environment === 'research') { scores['AI & Data Science'] += 25; }
+            else if (environment === 'freelance') { scores['Design & Creative'] += 25; }
+            else if (environment === 'client') { scores['Management'] += 20; }
+
+            // Normalize
+            const total = Object.values(scores).reduce((a, b) => a + b, 0);
+            Object.keys(scores).forEach(k => scores[k] = Math.round((scores[k] / total) * 100));
+
+            // Display results
+            document.getElementById('quizResult').classList.remove('hidden');
+            document.getElementById('userName-display').innerHTML = `<strong>${userName}</strong>, here's your personalized career profile:`;
+
+            document.getElementById('eng-score').textContent = scores['Engineering & Tech'] + '%';
+            document.getElementById('ai-score').textContent = scores['AI & Data Science'] + '%';
+            document.getElementById('management-score').textContent = scores['Management'] + '%';
+            document.getElementById('design-score').textContent = scores['Design & Creative'] + '%';
+            document.getElementById('arts-score').textContent = scores['Arts & Humanities'] + '%';
+            document.getElementById('healthcare-score').textContent = scores['Healthcare'] + '%';
+
+            const topDomain = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            const recommendations = {
+                'Engineering & Tech': 'Strong technical skills suit Engineering & IT roles.',
+                'AI & Data Science': 'Your analytical abilities are perfect for Data Science & AI.',
+                'Management': 'Your leadership skills position you well in management roles.',
+                'Design & Creative': 'Your creativity suits Design & UX/UI careers.',
+                'Arts & Humanities': 'Your communication skills suit Arts & Humanities.',
+                'Healthcare': 'Your empathy suits Healthcare professions.'
+            };
+
+            document.getElementById('recommendation').innerHTML = `${topDomain} (${scores[topDomain]}%)`;
+            document.getElementById('recommendation-desc').innerHTML = recommendations[topDomain];
+
+            createCareerChart(scores);
+            document.getElementById('quizResult').scrollIntoView({behavior: 'smooth'});
+
+            // Save quiz result to localStorage
+            saveQuizResult(userName, topDomain, scores);
+            displayQuizHistory();
+        };
+
+        // Save quiz results
+        function saveQuizResult(name, recommendation, scores) {
+            const result = {
+                name: name,
+                recommendation: recommendation,
+                scores: scores,
+                date: new Date().toLocaleDateString(),
+                time: new Date().toLocaleTimeString()
+            };
+
+            let quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+            quizResults.push(result);
+            localStorage.setItem('quizResults', JSON.stringify(quizResults));
+        }
+
+        // Display quiz history
+        function displayQuizHistory() {
+            const quizResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+            
+            if (quizResults.length === 0) return;
+
+            // Remove existing history if it exists
+            const existingHistory = document.getElementById('quizResult').querySelector('.quiz-history');
+            if (existingHistory) {
+                existingHistory.remove();
+            }
+
+            let historyHtml = '<div class="flex justify-between items-center mb-4">';
+            historyHtml += '<h4 class="text-xl font-bold gradient-text">📊 Your Quiz History</h4>';
+            historyHtml += '<button id="clearHistoryBtn" class="btn-gradient text-sm py-2 px-4">🗑️ Clear History</button>';
+            historyHtml += '</div>';
+            historyHtml += '<div class="space-y-3">';
+
+            quizResults.slice().reverse().forEach((result, index) => {
+                historyHtml += `
+                    <div class="history-item">
+                        <div class="history-item-info">
+                            <h4>${result.name}</h4>
+                            <p>${result.date} at ${result.time}</p>
+                        </div>
+                        <div class="history-item-score">${result.recommendation}</div>
+                    </div>
+                `;
+            });
+
+            historyHtml += '</div>';
+
+            const historyDiv = document.createElement('div');
+            historyDiv.className = 'quiz-history mt-8';
+            historyDiv.innerHTML = historyHtml;
+            const glassCard = document.getElementById('quizResult').querySelector('.glass-card');
+            glassCard.appendChild(historyDiv);
+
+            // attach listener to clear button
+            const clearBtn = document.getElementById('clearHistoryBtn');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', function() {
+                    localStorage.removeItem('quizResults');
+                    historyDiv.remove();
+                });
+            }
+        }
+
+        function createCareerChart(scores) {
+            const canvasElement = document.getElementById('careerChart');
+            if (!canvasElement) {
+                console.error('Canvas element not found');
+                return;
+            }
+            
+            const ctx = canvasElement.getContext('2d');
+            if (careerChart) {
+                careerChart.destroy();
+            }
+
+            careerChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(scores),
+                    datasets: [{
+                        data: Object.values(scores),
+                        backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe', '#ff6b6b'],
+                        borderColor: '#fff',
+                        borderWidth: 3,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { 
+                                font: { size: 13, weight: 'bold' }, 
+                                padding: 15,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(c) {
+                                    return c.label + ': ' + c.parsed + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ---- CAREER COMPARISON ----
+        function updateComparison() {
+            const c1 = document.getElementById('career1').value;
+            const c2 = document.getElementById('career2').value;
+
+            if (!c1 || !c2) {
+                document.getElementById('comparisonResults').classList.add('hidden');
+                return;
+            }
+
+            const d1 = careerFields[c1];
+            const d2 = careerFields[c2];
+
+            const html1 = `
+                <div>
+                    <h3 class="text-2xl font-bold gradient-text mb-4">${c1}</h3>
+                    <div class="comparison-card"><strong>Eligibility:</strong> ${d1.eligibility}</div>
+                    <div class="comparison-card"><strong>Skills:</strong> ${d1.skills}</div>
+                    <div class="comparison-card"><strong>Salary:</strong> ${d1.salary}</div>
+                    <div class="comparison-card"><strong>Recruiters:</strong> ${d1.recruiters}</div>
+                </div>
+            `;
+
+            const html2 = `
+                <div>
+                    <h3 class="text-2xl font-bold gradient-text mb-4">${c2}</h3>
+                    <div class="comparison-card"><strong>Eligibility:</strong> ${d2.eligibility}</div>
+                    <div class="comparison-card"><strong>Skills:</strong> ${d2.skills}</div>
+                    <div class="comparison-card"><strong>Salary:</strong> ${d2.salary}</div>
+                    <div class="comparison-card"><strong>Recruiters:</strong> ${d2.recruiters}</div>
+                </div>
+            `;
+
+            document.getElementById('comparison-career1-details').innerHTML = html1;
+            document.getElementById('comparison-career2-details').innerHTML = html2;
+            document.getElementById('comparisonResults').classList.remove('hidden');
+        }
+
+        // ---- CHATBOT ----
+        const chatbotForm = document.getElementById('chatbotForm');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        const chatbotWindow = document.getElementById('chatbotWindow');
+
+        document.getElementById('openChatbot').onclick = () => {
+            chatbotWindow.style.display = 'flex';
+            chatbotInput.focus();
+        };
+
+        document.getElementById('closeChatbot').onclick = () => {
+            chatbotWindow.style.display = 'none';
+        };
+
+        function appendMessage(sender, text) {
+            const msg = document.createElement('div');
+            msg.className = 'chatbot-message ' + sender;
+            const bubble = document.createElement('div');
+            bubble.className = 'chatbot-bubble';
+            bubble.innerHTML = text;
+            msg.appendChild(bubble);
+            chatbotMessages.appendChild(msg);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function getBotReply(msg) {
+            msg = msg.toLowerCase();
+
+            if (msg.includes('salary') || msg.includes('package')) {
+                return "💰 <strong>Salary Info:</strong> Engineering: ₹3-8 LPA. Medical: ₹5-12 LPA. Law: ₹4-8 LPA. Management: ₹4-10 LPA. AI/DS: ₹8-15 LPA. With experience & specialization, salaries increase significantly!";
+            }
+            if (msg.includes('after 12th science')) {
+                return "🔬 <strong>After 12th Science:</strong> Engineering (JEE), Medical (NEET), B.Sc, Pharmacy, Architecture, Agriculture, Nursing.";
+            }
+            if (msg.includes('after 12th commerce')) {
+                return "📊 <strong>After 12th Commerce:</strong> B.Com, BBA, CA, CS, Banking, Finance, Accounts.";
+            }
+            if (msg.includes('after 12th arts')) {
+                return "📚 <strong>After 12th Arts:</strong> BA, Law (CLAT), Journalism, Design, Psychology, Social Work.";
+            }
+            if (msg.includes('engineering')) {
+                return "⚙️ <strong>Engineering:</strong> Take PCM, clear JEE/state exams, do B.Tech (4 years). Salary: ₹3-8 LPA starting.";
+            }
+            if (msg.includes('medical') || msg.includes('doctor')) {
+                return "👨‍⚕️ <strong>Medicine:</strong> Take PCB, clear NEET, do MBBS (5.5 years). Salary: ₹5-12 LPA starting.";
+            }
+            if (msg.includes('law')) {
+                return "⚖️ <strong>Law:</strong> Clear CLAT exam, pursue BA LLB (5 yrs) or LLB (3 yrs).Salary: ₹4-8 LPA.";
+            }
+            if (msg.includes('ai') || msg.includes('data science')) {
+                return "🤖 <strong>AI & Data Science:</strong> B.Tech CS + ML skills, Python, statistics. Salary: ₹8-15 LPA. High growth field!";
+            }
+            if (msg.includes('hello') || msg.includes('hi')) {
+                return "👋 <strong>Hi there!</strong> Ask me about careers, exams, salaries, or use the Career Quiz above! 😊";
+            }
+
+            return "🤔 Great question! Use the Career Quiz or compare two careers to explore your options. Ask about specific careers like Engineering, Medicine, Law, or Management!";
+        }
+
+        chatbotForm.onsubmit = function(e) {
+            e.preventDefault();
+            const userMsg = chatbotInput.value.trim();
+            if (!userMsg) return;
+
+            appendMessage('user', userMsg);
+            chatbotInput.value = '';
+
+            setTimeout(() => {
+                const botReply = getBotReply(userMsg);
+                appendMessage('bot', botReply);
+                speakText(botReply.replace(/<[^>]*>/g, ''));
+            }, 600);
+        };
+
+        // ---- CONTACT FORM ----
+        const contactForm = document.getElementById('contactForm');
+        const contactStatus = document.getElementById('contactStatus');
+
+        contactForm.onsubmit = function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const phone = document.getElementById('contactPhone').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+
+            // Save contact message to localStorage
+            let contactMessages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+            contactMessages.push({
+                name, email, phone, subject, message,
+                date: new Date().toLocaleDateString(),
+                time: new Date().toLocaleTimeString()
+            });
+            localStorage.setItem('contactMessages', JSON.stringify(contactMessages));
+
+            // Show success message
+            contactStatus.classList.remove('hidden');
+            contactStatus.className = 'p-4 rounded-lg text-center font-semibold bg-green-100 text-green-800';
+            contactStatus.innerHTML = '✅ Thank you for your message! We\'ll get back to you soon.';
+            
+            // Reset form
+            contactForm.reset();
+
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                contactStatus.classList.add('hidden');
+            }, 5000);
+        };
+    </script>
+</body>
+</html>
